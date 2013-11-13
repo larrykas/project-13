@@ -1,26 +1,46 @@
 require 'mysql'
-
 class Account
-  def initialize(balance, name, job, account_number)
-    @balance = balance
+  def initialize(account_number, name, job, gender, balance)
+    @account_number = account_number
     @name = name
     @job = job
-    @account_number = account_number
+    @gender = gender
+    @balance = balance
     
-    @con = Mysql.new 'localhost', 'root', '**********', 'banking_system'
-   
+    @con = Mysql.new 'localhost', 'root', 'vanniekerk', 'banking_system'
+    con.query("INSERT INTO clients(account_number, name, job, gender, balance)VALUES(?, ?, ?, ?)")  
   end
   def deposit(money)
       bal = balance()
       num = bal.to_f
       num += money
-      st = @db.query("UPDATE accounts SET balance = '#{balance}'  WHERE name = '#{name}'")
+      st = @db.query("UPDATE accounts SET balance = '#{@balance}'  WHERE name = '#{@name}'")
       puts bal
   end
 
+#########################################################################################
+
+
+  def withdraw(amount)
+    @balance -= amount
+  end
+
+  def balance
+    puts "Name: " + @name
+    puts "Account number: " + @account_number.to_s 
+    puts "Balance: " + @balance.to_s
+  end
+
+  def transfer(amount, target_account)
+    @balance -= amount
+    target_account.deposit(amount)
+  end
+
+  def status
+    return @balance
+  end
 end
 
-# I can't get Just this little code to work.
 
 ############################################################################################
 code with a new message, it looks like the new account was sucessfully created
