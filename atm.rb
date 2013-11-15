@@ -1,4 +1,3 @@
-
  require 'mysql'
 class Account
   def initialize(account_number, name, job, gender, balance)
@@ -10,7 +9,7 @@ class Account
     
   end
    
-  con = Mysql.new('localhost', 'root', 'vanniekerk', 'banking_system');
+  con = Mysql.new('localhost', 'root', '**********', 'banking_system');
   con.query("CREATE TABLE IF NOT EXISTS \ Accounts(account_number INT PRIMARY KEY, name VARCHAR(50), job VARCHAR(25), gender VARCHAR(6), balance INT(25))");
   st = con.prepare("INSERT INTO Accounts(account_number, name, job, gender, balance)VALUES(?, ?, ?, ?, ?)")
   st.execute(11239, 'Larry', 'Pro', 'male', 3400)
