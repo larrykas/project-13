@@ -7,17 +7,21 @@ class Account
     @gender = gender
     @balance = balance
     
+    begin 
+      con = Mysql.new('localhost', 'root', '**********', 'banking_system');
+      con.query("CREATE TABLE IF NOT EXISTS \ Accounts(account_number INT PRIMARY KEY, name VARCHAR(50), job VARCHAR(25), gender VARCHAR(6), balance INT(25))");
+      st = con.prepare("INSERT INTO Accounts(account_number, name, job, gender, balance)VALUES(?, ?, ?, ?, ?)")
+      st.execute(11239, 'Larry', 'Pro', 'male', 3400)
+      st.execute(11240, 'Sedy', 'Analyst', 'male', 2400)
+      st.execute(11241, 'Cheryl', 'Accountant', 'female', 2400)
+      st.close  
+      con.commit
+      rescue Exception => e
+             puts e
+             puts e.backtrace.join('\n')
+         
+      end
   end
-   
-  con = Mysql.new('localhost', 'root', '**********', 'banking_system');
-  con.query("CREATE TABLE IF NOT EXISTS \ Accounts(account_number INT PRIMARY KEY, name VARCHAR(50), job VARCHAR(25), gender VARCHAR(6), balance INT(25))");
-  st = con.prepare("INSERT INTO Accounts(account_number, name, job, gender, balance)VALUES(?, ?, ?, ?, ?)")
-  st.execute(11239, 'Larry', 'Pro', 'male', 3400)
-  st.execute(11240, 'Sedy', 'Analyst', 'male', 2400)
-  st.execute(11241, 'Cheryl', 'Accountant', 'female', 2400)
-  st.close  
-  con.commit
-   
    
   def insert(dto) 
     
