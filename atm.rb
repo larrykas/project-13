@@ -1,4 +1,6 @@
- require 'mysql'
+require 'rubygems'
+require 'mysql'
+
 class Account
   def initialize(account_number, name, job, gender, balance)
     @account_number = account_number
