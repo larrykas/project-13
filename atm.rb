@@ -12,43 +12,46 @@ class Account
     begin 
       # Hello World
       # Newbie 
-      # con.query("CREATE TABLE IF NOT EXISTS \ Accounts(account_number INT PRIMARY KEY, name VARCHAR(50), job VARCHAR(25), gender VARCHAR(6), balance INT(25))");
       st = con.prepare("INSERT INTO Accounts(account_number, name, job, gender, balance)VALUES(?, ?, ?, ?, ?)")
-      st.execute(11239, 'Larry', 'Pro', 'male', 3400)
-      st.execute(11240, 'Sedy', 'Analyst', 'male', 2400)
-      st.execute(11241, 'Cheryl', 'Accountant', 'female', 2400)
+      st.execute(account_number, name, job, gender, balance)
+     
       st.close  
       con.commit
-      rescue Exception => e
-             puts e
-             puts e.backtrace.join('\n')
+    rescue Exception => e
+       puts e
+       puts e.backtrace.join('\n')
          
-      end
+    end
   end
    
-  def insert(dto) 
-    
-  end
   
   def deposit(amount)
-      bal = balance()
-      num = bal.to_f
-      num += money
-      st = @db.query("UPDATE Accounts SET balance = '#{@balance}'  WHERE name = '#{@name}'")
-      puts bal
+      num = @balance.to_f
+      num += amount
+      update_balance(num)
   end
 
 #########################################################################################
 
 
   def withdraw(amount)
-    @balance -= amount
+    num = @balance.to_f
+    num -= amount
+    update_balance(num)
+  end
+  
+  def update_balance(new_balance)
+    @balance = new_balance
+    st = @con.query("UPDATE Accounts SET balance = '#{new_balance}'  WHERE name = '#{@name}'")
+
   end
 
   def balance
-    puts "Name: " + @name
-    puts "Account number: " + @account_number.to_s 
-    puts "Balance: " + @balance.to_s
+    #st = SELECT * FROM Accounts WHERE name = Steve
+    #puts "Name: " + @name
+    #puts "Account number: " + @account_number.to_s 
+    #puts "Balance: " + @balance.to_s
+    return @balance
   end
 
   def transfer(amount, target_account)
