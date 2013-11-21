@@ -8,10 +8,10 @@ class Account
     @job = job
     @gender = gender
     @balance = balance
-    
+    @con = Mysql.new('localhost', 'root', '**********', 'banking_system');
     begin 
-      con = Mysql.new('localhost', 'root', '**********', 'banking_system');
-      con.query("CREATE TABLE IF NOT EXISTS \ Accounts(account_number INT PRIMARY KEY, name VARCHAR(50), job VARCHAR(25), gender VARCHAR(6), balance INT(25))");
+      
+      #con.query("CREATE TABLE IF NOT EXISTS \ Accounts(account_number INT PRIMARY KEY, name VARCHAR(50), job VARCHAR(25), gender VARCHAR(6), balance INT(25))");
       st = con.prepare("INSERT INTO Accounts(account_number, name, job, gender, balance)VALUES(?, ?, ?, ?, ?)")
       st.execute(11239, 'Larry', 'Pro', 'male', 3400)
       st.execute(11240, 'Sedy', 'Analyst', 'male', 2400)
