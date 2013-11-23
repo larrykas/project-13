@@ -8,10 +8,11 @@ class Account
     @job = job
     @gender = gender
     @balance = balance
-    @con = Mysql.new('localhost', 'root', '**********', 'banking_system');
+    @con = Mysql.new(); 
     begin 
       # Hello World
-      # Newbie 
+      # Newbie
+      con = Mysql.new('localhost', 'root', 'vanniekerk', 'banking_system'); 
       st = con.prepare("INSERT INTO Accounts(account_number, name, job, gender, balance)VALUES(?, ?, ?, ?, ?)")
       st.execute(account_number, name, job, gender, balance)
      
@@ -20,7 +21,7 @@ class Account
     rescue Exception => e
        puts e
        puts e.backtrace.join('\n')
-         
+      
     end
   end
    
@@ -42,16 +43,16 @@ class Account
   
   def update_balance(new_balance)
     @balance = new_balance
-    st = @con.query("UPDATE Accounts SET balance = '#{new_balance}'  WHERE name = '#{@name}'")
+    st = con.query("UPDATE Accounts SET balance = '#{new_balance}'  WHERE name = '#{@name}'")
 
   end
 
   def balance
     #st = SELECT * FROM Accounts WHERE name = Steve
-    #puts "Name: " + @name
-    #puts "Account number: " + @account_number.to_s 
-    #puts "Balance: " + @balance.to_s
-    return @balance
+    puts "Name: " + @name
+    puts "Account number: " + @account_number.to_s 
+    puts "Balance: " + @balance.to_s
+    #return @balance
   end
 
   def transfer(amount, target_account)
