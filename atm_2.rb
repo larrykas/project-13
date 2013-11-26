@@ -1,3 +1,4 @@
+# This is the one we did together but still runs errors when I make deposits and withdraws.
 require 'rubygems'
 require 'mysql'
 
