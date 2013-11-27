@@ -8,7 +8,7 @@ class Account
     @job = job
     @gender = gender
     @balance = balance
-    con = Mysql.new('localhost', 'root', 'vanniekerk', 'banking_system');
+    @con = Mysql.new('localhost', 'root', 'vanniekerk', 'banking_system');
     begin 
       # Hello World
       # Newbie
