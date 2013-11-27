@@ -1,3 +1,4 @@
+# "80% of the program is working fine, just need to include the find method"
 require 'rubygems'
 require 'mysql'
 
