@@ -8,12 +8,12 @@ class Account
     @job = job
     @gender = gender
     @balance = balance
-    con = Mysql.new('localhost', 'root', 'vanniekerk', 'banking_system');
+    @con = Mysql.new('localhost', 'root', 'vanniekerk', 'banking_system');
     begin 
       # Hello World
       # Newbie
        
-      st = con.prepare("INSERT INTO Accounts(account_number, name, job, gender, balance)VALUES(?, ?, ?, ?, ?)")
+      st = @con.prepare("INSERT INTO Accounts(account_number, name, job, gender, balance)VALUES(?, ?, ?, ?, ?)")
       st.execute(account_number, name, job, gender, balance)
      
       st.close  
@@ -43,7 +43,7 @@ class Account
   
   def update_balance(new_balance)
     @balance = new_balance
-    st = con.query("UPDATE Accounts SET balance = '#{new_balance}'  WHERE name = '#{@name}'")
+    st = @con.query("UPDATE Accounts SET balance = '#{new_balance}'  WHERE name = '#{@name}'")
 
   end
 
