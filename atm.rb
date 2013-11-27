@@ -35,6 +35,26 @@ class Account
 
 #########################################################################################
 
+def find(name)
+  sql = ("SELECT * FROM Accounts WHERE name = ?")
+  st = @con.query("SELECT * FROM Accounts WHERE name = '#{name}'")
+  st.execute(name)
+  result = fetchResults(st)
+  st.close
+  con.commit
+  return result
+end
+
+#########################################################################################
+# Got this from Sedy but I still can't get it to work correctly
+#def find(name)
+#    st = @con.query("SELECT * FROM Accounts WHERE name = '#{name}'")
+#    st.each {|y| print y, " "}
+#end
+
+#########################################################################################
+
+
 
   def withdraw(amount)
     num = @balance.to_f
