@@ -9,11 +9,11 @@ class Account
     @job = job
     @gender = gender
     @balance = balance
-    @con = Mysql.new('localhost', 'root', 'vanniekerk', 'banking_system');
+    @con = Mysql.new();
     begin 
       # Hello World
       # Newbie
-       
+      con = Mysql.new('localhost', 'root', 'vanniekerk', 'banking_system');
       st = con.prepare("INSERT INTO Accounts(account_number, name, job, gender, balance)VALUES(?, ?, ?, ?, ?)")
       st.execute(account_number, name, job, gender, balance)
      
