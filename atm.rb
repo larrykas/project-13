@@ -36,13 +36,13 @@ class Account
 #########################################################################################
 
 def find(name)
-  sql = ("SELECT * FROM Accounts WHERE name = ?")
-  st = @con.query("SELECT * FROM Accounts WHERE name = '#{name}'")
+  #sql = ("SELECT * FROM Accounts WHERE name = ?")
+  st = @con.query("SELECT * FROM Accounts WHERE name = '#{name}';")
   st.execute(name)
-  result = fetchResults(st)
+  #result = fetchResults(st)
   st.close
   con.commit
-  return result
+  #return result
 end
 
 #########################################################################################
